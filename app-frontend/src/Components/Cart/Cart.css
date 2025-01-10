@@ -16,3 +16,21 @@
   font-size: 18px;
   font-weight: 600;
 }
+.checkout-button {
+  margin-top: 1%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ea0000;
+}
+.remove-button {
+  margin-top: 1%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ea0000;
+}

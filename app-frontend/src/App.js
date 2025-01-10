@@ -5,14 +5,14 @@ import Card from "./Components/Cards/Card";
 import Footer from "./Components/Footer/Footer";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import Cart from "./Components/Cart/Cart";
-import Checkout from './Components/Checkout/Checkout'
+import Checkout from "./Components/Checkout/Checkout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8181/api/v1/products/all")
+    fetch("http://localhost:8080/api/v1/products/all")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));

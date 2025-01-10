@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../Cart/cartContext"; // Import the useCart hook
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import "./Checkout.css";
 
 const Checkout = () => {
   const { cart, clearCart } = useCart();
@@ -20,20 +21,23 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8181/api/v1/products/api/v1/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          items: cart.map(item => ({
-            _id: item._id,
-            quantity: item.quantity || 1,
-            price: item.price,
-          })),
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8080/api/v1/products/api/v1/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            items: cart.map((item) => ({
+              _id: item._id,
+              quantity: item.quantity || 1,
+              price: item.price,
+            })),
+          }),
+        }
+      );
 
       if (response.ok) {
         clearCart(); // Clear the cart
@@ -48,10 +52,11 @@ const Checkout = () => {
   };
 
   return (
-    <div>
-      <h1>Checkout</h1>
+    <div className="headr">
+      <h1 className="heading">Checkout</h1>
       <form onSubmit={handleSubmit}>
         <input
+          className="data"
           type="text"
           name="name"
           placeholder="Name"
@@ -60,6 +65,7 @@ const Checkout = () => {
           required
         />
         <input
+          className="data"
           type="email"
           name="email"
           placeholder="Email"
@@ -68,6 +74,7 @@ const Checkout = () => {
           required
         />
         <input
+          className="data"
           type="tel"
           name="phone"
           placeholder="Phone Number"
@@ -76,6 +83,7 @@ const Checkout = () => {
           required
         />
         <input
+          className="data"
           type="text"
           name="address"
           placeholder="Address"
@@ -83,7 +91,9 @@ const Checkout = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Submit Order</button>
+        <button className="submit-btn" type="submit">
+          Submit Order
+        </button>
       </form>
     </div>
   );
