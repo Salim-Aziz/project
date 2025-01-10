@@ -2,11 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import Product from "./Models/productModel.js";
 import cors from "cors";
+import bodyParser from "body-parser";
+import Order from "./Models/Order.js";
 
 // var cors = require("cors");
 
 const app = express();
 app.use(express.json()); // To parse JSON request bodies
+app.use(bodyParser.json()); // Parse JSON bodies
 
 const mongoURI = "mongodb://127.0.0.1:27017/my-DB"; // Replace with your MongoDB connection string
 
@@ -100,6 +103,36 @@ app.get(`${api}/:id`, cors(corsOptions), async (req, res, next) => {
 
 app.get(api, (req, res, next) => {
   res.json(["Watch", "shoes", "shirt"]);
+});
+
+// Order POST API
+app.post(`${api}/api/v1/orders`, async (req, res) => {
+  try {
+    const { name, email, phone, address, items } = req.body;
+
+    // Validate the incoming data
+    if (!name || !email || !phone || !address || !items || items.length === 0) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newOrder = new Order({
+      name,
+      email,
+      phone,
+      address,
+      items: items.map(item => ({
+        productId: item._id, // Ensure this matches your frontend data structure
+        quantity: item.quantity || 1,
+        price: item.price,
+      })),
+    });
+
+    await newOrder.save();
+    res.status(201).json(newOrder);
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).json({ message: "Error creating order", error: error.message });
+  }
 });
 
 const PORT = 8181;

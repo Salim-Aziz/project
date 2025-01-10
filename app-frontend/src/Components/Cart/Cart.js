@@ -19,29 +19,35 @@ const Cart = () => {
           </Link>
         </div>
       ) : (
-        <ul className="cart-items-list">
-          {cart.map((product, index) => (
-            <li key={index} className="cart-item">
-              <div className="cart-item-thumbnail">
-                <img src={product.image} alt={product.name} />
-              </div>
-              <div className="cart-item-details">
-                <h2 className="cart-item-name">{product.name}</h2>
-                <p className="cart-item-price">${product.price} x {product.quantity || 1}</p>
-                <button
-                  className="remove-button"
-                  onClick={() => removeFromCart(product._id)}
-                >
-                  Remove
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="cart-items-list">
+            {cart.map((product, index) => (
+              <li key={index} className="cart-item">
+                <div className="cart-item-thumbnail">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="cart-item-details">
+                  <h2 className="cart-item-name">{product.name}</h2>
+                  <p className="cart-item-price">${product.price} x {product.quantity || 1}</p>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeFromCart(product._id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="total-amount">
+            Total Price: ${cart.reduce((total, product) => total + (product.price * (product.quantity || 1)), 0).toFixed(2)}
+          </div>
+
+          <Link to="/checkout">
+            <button className="checkout-button">Checkout</button>
+          </Link>
+        </>
       )}
-      <div className="total-amount">
-        Total Price: ${cart.reduce((total, product) => total + (product.price * (product.quantity || 1)), 0).toFixed(2)}
-      </div>
 
       <style>{`
         .cart-container {
