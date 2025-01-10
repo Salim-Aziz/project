@@ -10,8 +10,10 @@ import Order from "./Models/Order.js";
 const app = express();
 app.use(express.json()); // To parse JSON request bodies
 app.use(bodyParser.json()); // Parse JSON bodies
-
-const mongoURI = "mongodb://127.0.0.1:27017/my-DB"; // Replace with your MongoDB connection string
+//mongodb+srv://salimaziz:<db_password>@mern-project.nnguf.mongodb.net/?retryWrites=true&w=majority&appName=mern-project
+// const mongoURI = "mongodb://127.0.0.1:27017/my-DB"; // Replace with your MongoDB connection string
+const mongoURI =
+  "mongodb+srv://salimaziz:salimaziz123@mern-project.nnguf.mongodb.net/?retryWrites=true&w=majority&appName=mern-project"; // Replace with your MongoDB connection string
 
 mongoose
   .connect(mongoURI, {})
@@ -21,7 +23,7 @@ mongoose
     // Create a static product
     const staticProduct = {
       name: "Note Book",
-      image: "http://localhost:8181/public/images/p1.jpeg",
+      image: "http://localhost:8080/public/images/p1.jpeg",
       price: 50.0,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,",
@@ -79,7 +81,7 @@ app.get(`${api}/:id`, cors(corsOptions), async (req, res, next) => {
     const productId = req.params.id;
 
     // Validate productId before querying
-    if (!productId || productId === 'undefined') {
+    if (!productId || productId === "undefined") {
       return res.status(400).json({ error: "Invalid product ID" });
     }
 
@@ -120,7 +122,7 @@ app.post(`${api}/api/v1/orders`, async (req, res) => {
       email,
       phone,
       address,
-      items: items.map(item => ({
+      items: items.map((item) => ({
         productId: item._id, // Ensure this matches your frontend data structure
         quantity: item.quantity || 1,
         price: item.price,
@@ -131,11 +133,13 @@ app.post(`${api}/api/v1/orders`, async (req, res) => {
     res.status(201).json(newOrder);
   } catch (error) {
     console.error("Error creating order:", error);
-    res.status(500).json({ message: "Error creating order", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error creating order", error: error.message });
   }
 });
 
-const PORT = 8181;
+const PORT = 8080;
 
 app.listen(PORT, () => {
   console.log(`server is runnig at port : ${PORT}`);
