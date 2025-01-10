@@ -5,8 +5,7 @@ import Card from "./Components/Cards/Card";
 import Footer from "./Components/Footer/Footer";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import Cart from "./Components/Cart/Cart";
-// import { ProductProvider } from "./Components/productContext.jsx";
-// import  from "./Components/Cards/CardMainPage";
+import Checkout from './Components/Checkout/Checkout'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -45,6 +44,15 @@ const App = () => {
             element={
               <>
                 <Cart />
+              </>
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <Checkout />
               </>
             }
           />

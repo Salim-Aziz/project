@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetails.css";
+import { useCart } from "../Cart/cartContext"; // Import the useCart hook
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
+  const { addToCart } = useCart(); // Get addToCart function from context
 
   useEffect(() => {
     fetch(`http://localhost:8181/api/v1/products/${id}`)
@@ -31,7 +33,7 @@ function ProductDetails() {
             <div className="new-price">${product.price}</div>
           </div>
 
-          <button>Add to cart</button>
+          <button onClick={() => addToCart(product)}>Add to cart</button>
         </div>
       </div>
     </>
