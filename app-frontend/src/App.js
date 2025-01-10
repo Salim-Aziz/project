@@ -1,17 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Slider from "./Components/Slider/Slider";
 import Card from "./Components/Cards/Card";
 import Footer from "./Components/Footer/Footer";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import Cart from "./Components/Cart/Cart";
+// import { ProductProvider } from "./Components/productContext.jsx";
 // import  from "./Components/Cards/CardMainPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/v1/products/all")
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error fetching products:", error));
+  }, []);
+
+  // console.log("these are all products:", products);
+
   return (
     <>
-      <Navbar />
-      <Slider />
-      <Card />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/product" element={<ProductDetails />} />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Slider />
+                <Card products={products} />
+              </>
+            }
+          />
+
+          <Route
+            path="/cart"
+            element={
+              <>
+                <Cart />
+              </>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+
       <Footer />
+
+      {/* <Signup /> */}
     </>
   );
 };
