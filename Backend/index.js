@@ -17,11 +17,11 @@ mongoose
 
     // Create a static product
     const staticProduct = {
-      name: "Tape",
-      image: "http://localhost:8080/public/images/p12.jpeg",
-      price: 25.0,
+      name: "Note Book",
+      image: "http://localhost:8181/public/images/p1.jpeg",
+      price: 50.0,
       description:
-        "Unleash your creativity with this set of vibrant washi tapes! Featuring a variety of colors and patterns, these tapes are perfect for adding a touch of personality to your planners, journals, and other craft projects. The tapes are easy to tear and reposition, making them perfect for any DIY project.",
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,",
     };
 
     try {
@@ -70,11 +70,39 @@ app.get(`${api}/all`, cors(corsOptions), async (req, res, next) => {
   }
 });
 
+// GET Product by ID
+app.get(`${api}/:id`, cors(corsOptions), async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+
+    // Validate productId before querying
+    if (!productId || productId === 'undefined') {
+      return res.status(400).json({ error: "Invalid product ID" });
+    }
+
+    // Validate if productId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ error: "Invalid product ID format" });
+    }
+
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    res.status(500).json({ error: "Failed to fetch product" });
+  }
+});
+
 app.get(api, (req, res, next) => {
   res.json(["Watch", "shoes", "shirt"]);
 });
 
-const PORT = 8080;
+const PORT = 8181;
 
 app.listen(PORT, () => {
   console.log(`server is runnig at port : ${PORT}`);

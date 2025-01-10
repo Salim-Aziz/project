@@ -13,7 +13,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/products/all")
+    fetch("http://localhost:8181/api/v1/products/all")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
@@ -26,7 +26,7 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/product" element={<ProductDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
 
         <Routes>
