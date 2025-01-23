@@ -14,8 +14,8 @@ const Cart = () => {
       {cart.length === 0 ? (
         <div className="empty-cart-container">
           <p className="empty-cart">No items in the cart</p>
-          <Link to="/" className="home-button">
-            <button>Go to Home</button>
+          <Link to="/">
+            <button className="home-button"> Go to Home</button>
           </Link>
         </div>
       ) : (
@@ -28,7 +28,9 @@ const Cart = () => {
                 </div>
                 <div className="cart-item-details">
                   <h2 className="cart-item-name">{product.name}</h2>
-                  <p className="cart-item-price">${product.price} x {product.quantity || 1}</p>
+                  <p className="cart-item-price">
+                    ${product.price} x {product.quantity || 1}
+                  </p>
                   <button
                     className="remove-button"
                     onClick={() => removeFromCart(product._id)}
@@ -40,7 +42,14 @@ const Cart = () => {
             ))}
           </ul>
           <div className="total-amount">
-            Total Price: ${cart.reduce((total, product) => total + (product.price * (product.quantity || 1)), 0).toFixed(2)}
+            Total Price: $
+            {cart
+              .reduce(
+                (total, product) =>
+                  total + product.price * (product.quantity || 1),
+                0
+              )
+              .toFixed(2)}
           </div>
 
           <Link to="/checkout">

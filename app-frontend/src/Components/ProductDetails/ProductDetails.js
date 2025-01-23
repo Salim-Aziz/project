@@ -9,7 +9,7 @@ function ProductDetails() {
   const { addToCart } = useCart(); // Get addToCart function from context
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/products/${id}`)
+    fetch(`https://project-five-dusky-70.vercel.app/api/v1/products/${id}`)
       .then((response) => response.json())
       .then((data) => setProduct(data))
       .catch((error) => console.error("Error fetching product:", error));

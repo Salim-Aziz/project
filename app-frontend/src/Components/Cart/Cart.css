@@ -34,3 +34,12 @@
   cursor: pointer;
   background-color: #ea0000;
 }
+.home-button {
+  margin-top: 1%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ea0000;
+}

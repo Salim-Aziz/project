@@ -9,10 +9,7 @@ const CardMainPage = (props) => {
   return (
     <>
       <div className="product-box">
-        <Link
-          style={{ textDecoration: "none" }}
-          to={`/product/${props._id}`}
-        >
+        <Link style={{ textDecoration: "none" }} to={`/product/${props._id}`}>
           <img src={props.image} alt="" />
           <div className="discription">
             <h2>{props.name}</h2>
@@ -23,10 +20,12 @@ const CardMainPage = (props) => {
             <p className="para"></p>
           </div>
         </Link>
-        <Link to="/Cart">
-          {" "}
-          <button className="addtocart" onClick={() => addToCart(props)}>Add to Cart</button>
-        </Link>
+        {/* <Link to="/Cart">
+          {" "} */}
+        <button className="addtocart" onClick={() => addToCart(props)}>
+          Add to Cart
+        </button>
+        {/* </Link> */}
       </div>
     </>
   );

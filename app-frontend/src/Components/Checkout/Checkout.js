@@ -22,7 +22,7 @@ const Checkout = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/products/api/v1/orders",
+        "https://project-five-dusky-70.vercel.app/api/v1/products/api/v1/orders",
         {
           method: "POST",
           headers: {

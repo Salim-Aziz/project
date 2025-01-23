@@ -10,7 +10,7 @@ import Order from "./Models/Order.js";
 const app = express();
 app.use(express.json()); // To parse JSON request bodies
 app.use(bodyParser.json()); // Parse JSON bodies
-//mongodb+srv://salimaziz:<db_password>@mern-project.nnguf.mongodb.net/?retryWrites=true&w=majority&appName=mern-project
+// mongodb+srv://salimaziz:<db_password>@mern-project.nnguf.mongodb.net/?retryWrites=true&w=majority&appName=mern-project
 // const mongoURI = "mongodb://127.0.0.1:27017/my-DB"; // Replace with your MongoDB connection string
 const mongoURI =
   "mongodb+srv://salimaziz:salimaziz123@mern-project.nnguf.mongodb.net/?retryWrites=true&w=majority&appName=mern-project"; // Replace with your MongoDB connection string
@@ -23,7 +23,7 @@ mongoose
     // Create a static product
     const staticProduct = {
       name: "Note Book",
-      image: "http://localhost:8080/public/images/p1.jpeg",
+      image: "https://project-five-dusky-70.vercel.app/public/images/p1.jpeg",
       price: 50.0,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,",
@@ -50,7 +50,7 @@ mongoose
 
 // CORS configuration
 const corsOptions = {
-  origin: "http://localhost:3000", // Allow requests from this origin (e.g., your frontend)
+  origin: "https://app-frontend-drab-nine.vercel.app/", // Allow requests from this origin (e.g., your frontend)
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };

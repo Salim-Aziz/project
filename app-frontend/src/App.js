@@ -12,7 +12,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/products/all")
+    fetch("https://project-five-dusky-70.vercel.app/api/v1/products/all")
       .then((response) => response.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error fetching products:", error));
